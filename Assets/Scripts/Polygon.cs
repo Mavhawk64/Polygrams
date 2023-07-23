@@ -11,23 +11,11 @@ public class Polygon : MonoBehaviour
 		// Add a mesh
 		Mesh mesh = new();
 		Vector3[] vertices = GetRegularPolygonVertices();
-        // Vector3[] vertices = new Vector3[3]{new Vector3(-1, -0.866025403784439f, 0), new Vector3(0, 0.866025403784439f, 0), new Vector3(1, -0.866025403784439f, 0)};
-		Vector2[] uv = new Vector2[vertexCount];
+        Vector2[] uv = new Vector2[vertexCount];
 		int[] triangles = GetTriangles();
 		mesh.vertices = vertices;
 		mesh.uv = uv;
         mesh.triangles = triangles;
-
-        // Display the vertices in Debug
-        Debug.Log("Vertices:");
-        for (int i = 0; i < vertexCount; i++) {
-            Debug.Log(vertices[i]);
-        }
-        // Display the triangles in Debug
-        Debug.Log("Triangles:");
-        for (int i = 0; i < triangles.Length; i+=3) {
-            Debug.Log(triangles[i] + " " + triangles[i+1] + " " + triangles[i+2]);
-        }
 
 		GetComponent<MeshFilter>().mesh = mesh;
 	}
@@ -48,11 +36,9 @@ public class Polygon : MonoBehaviour
         float angle = 360f / vertexCount;
         float offset = -(90f - angle / 2f);
         // get vertices in clockwise order (bottom left to top left to top right to bottom right)
-        Debug.Log("GETTING VERTICES");
         int index = 0;
         for (int i = vertexCount - 1; i >= 0; i--) {
             v[index++] = new Vector3(radius * Mathf.Cos(Mathf.Deg2Rad * (angle * i + offset)), radius * Mathf.Sin(Mathf.Deg2Rad * (angle * i + offset)), 0);
-            Debug.Log(v[index-1] + " " + (angle * i + offset));
         }
         
 		return v;
